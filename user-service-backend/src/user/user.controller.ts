@@ -27,7 +27,7 @@ export class UserController {
     return this.userService.createUser(userData);
   }
 
-  @Put('update/:id')
+  @Post('update/:id')
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async updateUser(@Param('id') id: number, @Body() userData: UpdateUserDto) {
     return this.userService.updateUser(Number(id), userData);

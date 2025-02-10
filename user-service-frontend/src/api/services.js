@@ -1,4 +1,3 @@
-// api.js
 export const fetchUsers = async (search,page,pageSize) => {
     const apiURL=process.env.REACT_APP_API_URL
     let url = `${apiURL}/users?page=${page}&pageSize=${pageSize} `
@@ -36,7 +35,7 @@ export const fetchUsers = async (search,page,pageSize) => {
   export const updateUser = async (id, userData) => {
     const apiURL=process.env.REACT_APP_API_URL
     const response = await fetch(`${apiURL}/users/update/${id}`, {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },

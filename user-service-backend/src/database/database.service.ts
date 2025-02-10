@@ -22,15 +22,12 @@ export class DatabaseService implements OnModuleInit {
   private async initializeDatabase() {
     const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, CONNECTION_LIMIT } = this.getDatabaseConfig();
 
-    // İlk olarak database yoksa oluştur
     const tempPool = await createPool({ host: DB_HOST, user: DB_USER, password: DB_PASSWORD, connectionLimit: CONNECTION_LIMIT });
     await tempPool.execute(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\``);
     await tempPool.end();
 
-    // Pool'u database ile oluştur
     this.pool = await createPool({ host: DB_HOST, user: DB_USER, password: DB_PASSWORD, database: DB_NAME, connectionLimit: CONNECTION_LIMIT });
 
-    // Tabloları oluştur
     await this.createUsersTable();
     await this.insertMockData();
   }
